@@ -1,0 +1,19 @@
+functions:
+  web:
+    lang: node10-express
+    handler: ./ts-frontend
+    image: ${DOCKER_USER:-qolzam}/web:${STACK_VER:-dev}
+    fprocess: ""
+    environment:
+      write_debug: "true"
+    labels:
+      com.openfaas.scale.zero: "false"
+      openfaas-cloud: "1"
+      role: openfaas-system
+      telar.dev.appID: my-social-network
+      telar.dev.repo: ts-ui
+    annotations:
+      linkerd.io/inject: disabled
+provider:
+  name: openfaas
+  gateway: http://192.168.1.18:31112
